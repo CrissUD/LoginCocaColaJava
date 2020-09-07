@@ -27,14 +27,14 @@ public class LoginTemplate extends JFrame{
 
     private JPanel pFondo, pDatos, pSuperior,pBarra;
     private JButton bCerrar, bIngresar;
-    private JLabel lFondo, lLogoLogin;
+    private JLabel lFondo, lLogoLogin, lLogo;
     private JLabel lNombreUsuario, lTipoUsuario, lClaveUsuario;
     private JTextField tNombreUsuario;
     private JPasswordField tClaveUsuario;
     private JComboBox<String> cmbTipoUsuario;
     
     private ImageIcon iFondo, iLogo, iCerrar, iDimAux;
-    private Border bordeRedondeadoFondo, bordeRedondeado, bordeInferior;
+    private Border bordeRedondeadoFondo, bordeRedondeado, bordeInferior, bordeCircular;
     
     public LoginTemplate(LoginComponent loginComponent){
         
@@ -65,9 +65,10 @@ public class LoginTemplate extends JFrame{
         iDimAux = new ImageIcon(
             iFondo.getImage().getScaledInstance(900, 600, Image.SCALE_AREA_AVERAGING)
         ); 
-        bordeRedondeadoFondo = sGraficosAvanzados.DibujarBordeRedondeado(null, 40, false, iDimAux.getImage());
-        bordeRedondeado = sGraficosAvanzados.DibujarBordeRedondeado(null, 40, false, null);
+        bordeRedondeadoFondo = sGraficosAvanzados.DibujarBordeRedondeado(null, 40, false, false, iDimAux.getImage());
+        bordeRedondeado = sGraficosAvanzados.DibujarBordeRedondeado(null, 40, false, false, null);
         bordeInferior = BorderFactory.createMatteBorder(0, 0, 2, 0, sRecursos.getColorRojo());
+        bordeCircular = sGraficosAvanzados.DibujarBordeCircular(sRecursos.getColorRojo(), true, false, iDimAux.getImage());
     }
 
     public void crearJPanels(){
@@ -85,6 +86,8 @@ public class LoginTemplate extends JFrame{
     }
 
     public void crearJLabels(){
+        // lLogo = sObjGraficos.construirJLabel(null, 20, 20, 70, 70, null, null, null, null, null, bordeCircular, "c");
+        // pFondo.add(lLogo);
         iDimAux = new ImageIcon(
             iFondo.getImage().getScaledInstance(pFondo.getWidth(), pFondo.getHeight(), Image.SCALE_AREA_AVERAGING)
         ); 
@@ -96,6 +99,8 @@ public class LoginTemplate extends JFrame{
             "", 0, 0, 220, 120, sRecursos.getCMano(), iDimAux, null, null, null, null, "c"
         );
         pSuperior.add(lLogoLogin);
+
+        
         
         lNombreUsuario = sObjGraficos.construirJLabel(
             "Nombre de Usuario", 120, 185, 110, 30, null, null,
